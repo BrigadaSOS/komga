@@ -1,0 +1,78 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: brigadasos-komga
+  namespace: brigadasos-komga
+spec:
+  replicas: 1
+  revisionHistoryLimit: 1
+  selector:
+    matchLabels:
+      app: brigadasos-komga
+  template:
+    metadata:
+      labels:
+        app: brigadasos-komga
+    spec:
+      imagePullSecrets:
+        - name: regcred
+      containers:
+        - image: brigadasos-komga
+          name: brigadasos-komga
+          ports:
+            - containerPort: 25600
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: brigadasos-komga-service
+  namespace: brigadasos-komga
+  labels:
+    app: brigadasos-komga
+spec:
+  selector:
+    app: brigadasos-komga
+  ports:
+   - port: 25600
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: brigadasos-komga-cert
+  namespace: brigadasos-komga
+spec:
+  secretName: certificate-brigadasos-komga
+  dnsNames:
+    - biblioteca.brigadasos.xyz
+  issuerRef:
+    name: clusterissuer-le
+    kind: ClusterIssuer
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: brigadasos-komga-ingress
+  namespace: brigadasos-komga
+  labels:
+    app: brigadasos-komga
+  annotations:
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    cert-manager.io/issuer: clusterissuer-le
+spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+        - biblioteca.brigadasos.xyz
+      secretName: certificate-brigadasos-komga
+  rules:
+    - host: bibloteca.brigadasos.xyz
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+                name: brigadasos-komga-service
+                port:
+                  number: 25600
