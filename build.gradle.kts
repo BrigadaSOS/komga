@@ -159,7 +159,7 @@ jreleaser {
 
   packagers {
     docker {
-      owner = "brigadasos"
+      repoOwner = "brigadasos"
       active = Active.RELEASE
       continueOnError = true
       templateDirectory = rootDir.resolve("komga/docker")
