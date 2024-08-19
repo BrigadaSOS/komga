@@ -167,11 +167,14 @@ jreleaser {
       buildArgs = listOf("--cache-from", "brigadasos/komga:latest")
       imageNames =
         listOf(
-          "komga:latest",
-          "komga:{{projectVersion}}",
+          "brigadasos/komga:{{projectVersion}}",
         )
       registries {
-        create("ghcr.io") { externalLogin = true }
+        create("ghcr.io") {
+          externalLogin = true
+          username = "brigadasos"
+          repositoryName = "brigadasos"
+        }
       }
       buildx {
         enabled = true
