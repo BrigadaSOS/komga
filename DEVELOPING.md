@@ -26,7 +26,6 @@ Komga's commit messages follow the [Conventional Commits](https://www.convention
 Komga is composed of 3 projects:
 - `komga`: a Spring Boot backend server that hosts the APIs, but also serves the static assets of the frontend.
 - `komga-webui`: a VueJS frontend, built at compile time and served by the backend at runtime.
-- `komga-tray`: a thin desktop wrapper that displays a tray-icon
 
 ## Backend development
 

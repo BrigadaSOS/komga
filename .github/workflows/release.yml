@@ -124,7 +124,7 @@ jobs:
       - uses: gradle/actions/setup-gradle@v3
 
       - name: Build
-        run: ./gradlew :komga:prepareThymeLeaf :komga:bootJar :komga-tray:jar
+        run: ./gradlew :komga:prepareThymeLeaf :komga:bootJar
         env:
           NODE_OPTIONS: "--max-old-space-size=4096"
 
