@@ -159,11 +159,11 @@ jreleaser {
 
   packagers {
     docker {
-      repoOwner = "brigadasos"
       active = Active.RELEASE
       continueOnError = true
       templateDirectory = rootDir.resolve("komga/docker")
       repository.active = Active.NEVER
+      repository.repoOwner = "brigadasos"
       buildArgs = listOf("--cache-from", "brigadasos/komga:latest")
       imageNames =
         listOf(
