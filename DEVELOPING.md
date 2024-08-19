@@ -2,6 +2,10 @@
 
 Thanks a lot for contributing to Komga!
 
+## Internal notes
+* Use Java17
+* Removed some parts that we will not use (related to windows app version and komga-tray). Only komga (backend) and komga-ui (frontend) are required.
+
 ## Requirements
 
 You will need:
