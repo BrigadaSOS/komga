@@ -24,15 +24,15 @@ on:
         type: boolean
       conveyor-copied-site:
         description: 'Conveyor copied site'
-        default: true
+        default: false
         type: boolean
       docker_release:
         description: 'Push Docker images'
-        default: true
+        default: false
         type: boolean
       msstore_release:
         description: 'Release to the MS Store'
-        default: true
+        default: false
         type: boolean
 
 jobs:
