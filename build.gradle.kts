@@ -159,6 +159,7 @@ jreleaser {
 
   packagers {
     docker {
+      owner = "brigadasos"
       active = Active.RELEASE
       continueOnError = true
       templateDirectory = rootDir.resolve("komga/docker")
@@ -166,8 +167,8 @@ jreleaser {
       buildArgs = listOf("--cache-from", "brigadasos/komga:latest")
       imageNames =
         listOf(
-          "brigadasos/komga:latest",
-          "brigadasos/komga:{{projectVersion}}",
+          "komga:latest",
+          "komga:{{projectVersion}}",
         )
       registries {
         create("ghcr.io") { externalLogin = true }
