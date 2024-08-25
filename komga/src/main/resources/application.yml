@@ -61,8 +61,8 @@ spring:
         registration:
           discord:
             provider: discord # this must match the provider below
-            client-id: ${env.DISCORD_OAUTH2_CLIENT_ID}
-            client-secret: ${env.DISCORD_OAUTH2_CLIENT_SECRET}
+            client-id: \${DISCORD_OAUTH2_CLIENT_ID}
+            client-secret: \${DISCORD_OAUTH2_CLIENT_SECRET}
             client-name: Discord
             scope: identify,guilds,guilds.members.read
             authorization-grant-type: authorization_code
