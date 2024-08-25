@@ -6,4 +6,4 @@ namespace: brigadasos-komga
 images:
 - name: brigadasos-komga
   newName: ghcr.io/brigadasos/komga
-  newTag: "0.0.2"
+  newTag: "0.0.3"
