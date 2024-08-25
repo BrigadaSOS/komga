@@ -1,3 +1,47 @@
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: brigadasos-komga-shared-pv
+  labels:
+    type: local
+    app: brigadasos-komga
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/brigadasos-shared"
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: brigadasos-komga-shared-pv-claim
+  labels:
+    app: brigadasos-komga
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: brigadasos-komga-config-pv-claim
+  labels:
+    app: brigadasos-komga
+spec:
+  storageClassName: local-path
+  accessModes:
+   - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -21,6 +65,18 @@ spec:
           name: brigadasos-komga
           ports:
             - containerPort: 25600
+        volumeMount:
+        - mountPath: /config
+          name: brigadasos-komga-config-vol
+        - mountPath: /config
+          name: brigadasos-komga-shared-vol
+      volumes:
+        - name: brigadasos-komga-config-vol
+          persistentVolumeClaim:
+            claimName: brigadasos-komga-config-pv-claim
+        - name: brigadasos-komga-shared-vol
+          persistentVolumeClaim:
+            claimName: brigadasos-komga-shared-pv-claim
 ---
 apiVersion: v1
 kind: Service
