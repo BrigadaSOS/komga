@@ -65,7 +65,7 @@ spec:
           name: brigadasos-komga
           ports:
             - containerPort: 25600
-          volumeMount:
+          volumeMounts:
           - mountPath: /config
             name: brigadasos-komga-config-vol
           - mountPath: /shared
