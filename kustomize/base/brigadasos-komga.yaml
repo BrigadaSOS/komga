@@ -1,5 +1,5 @@
-kind: PersistentVolume
 apiVersion: v1
+kind: PersistentVolume
 metadata:
   name: brigadasos-komga-shared-pv
   labels:
@@ -14,8 +14,8 @@ spec:
   hostPath:
     path: "/mnt/brigadasos-shared"
 ---
-kind: PersistentVolumeClaim
 apiVersion: v1
+kind: PersistentVolumeClaim
 metadata:
   name: brigadasos-komga-shared-pv-claim
   labels:
@@ -68,7 +68,7 @@ spec:
         volumeMount:
         - mountPath: /config
           name: brigadasos-komga-config-vol
-        - mountPath: /config
+        - mountPath: /confikkg
           name: brigadasos-komga-shared-vol
       volumes:
         - name: brigadasos-komga-config-vol
