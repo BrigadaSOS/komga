@@ -7,7 +7,7 @@
         />
       </v-row>
 
-      <form novalidate @submit.prevent="performLogin">
+      <form class="mt-6" novalidate @submit.prevent="performLogin">
         <v-row justify="center" v-if="unclaimed">
           <v-col
             class="text-body-1 mt-2"
@@ -74,14 +74,10 @@
           </v-col>
         </v-row>
 
-        <v-divider class="my-4 mt-2"/>
-
-        <v-row>
+        <v-row align="center" justify="center">
           <v-col
             v-for="provider in oauth2Providers"
             :key="provider.registrationId"
-            cols="auto"
-            class="py-1"
           >
             <v-btn
               :disabled="unclaimed"

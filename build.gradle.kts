@@ -15,6 +15,7 @@ plugins {
   id("org.jlleitschuh.gradle.ktlint") version "12.1.0"
   id("com.github.ben-manes.versions") version "0.50.0"
   id("org.jreleaser") version "1.10.0"
+  id("co.uzzu.dotenv.gradle") version "4.0.0"
 }
 
 fun isNonStable(version: String): Boolean {
@@ -181,7 +182,7 @@ jreleaser {
         createBuilder = false
         platforms =
           listOf(
-            "linux/amd64"
+            "linux/amd64",
           )
       }
     }

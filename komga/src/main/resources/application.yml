@@ -14,6 +14,7 @@ logging:
     org.apache.fontbox.cff.Type1CharString: ERROR
 
 komga:
+  oauth2-account-creation: true
   database:
     file: \${komga.config-dir}/database.sqlite
   lucene:
@@ -54,6 +55,25 @@ spring:
       - "optional:file:\${komga.config-dir}/application.yml"
       - "optional:file:\${komga.config-dir}/application.yaml"
       - "optional:file:\${komga.config-dir}/application.properties"
+  security:
+    oauth2:
+      client:
+        registration:
+          discord:
+            provider: discord # this must match the provider below
+            client-id: ${env.DISCORD_OAUTH2_CLIENT_ID}
+            client-secret: ${env.DISCORD_OAUTH2_CLIENT_SECRET}
+            client-name: Discord
+            scope: identify,guilds,guilds.members.read
+            authorization-grant-type: authorization_code
+            # the placeholders in {} will be replaced automatically, you don't need to change this line
+            redirect-uri: "{baseUrl}/{action}/oauth2/code/{registrationId}"
+        provider:
+          discord: # this must match the provider above
+            user-name-attribute: email
+            authorization-uri: https://discord.com/oauth2/authorize
+            token-uri: https://discord.com/api/oauth2/token
+            user-info-uri: https://discord.com/api/users/@me
 
 server:
   servlet.session.timeout: 7d

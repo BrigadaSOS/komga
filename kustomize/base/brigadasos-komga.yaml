@@ -70,6 +70,9 @@ spec:
             name: brigadasos-komga-config-vol
           - mountPath: /shared
             name: brigadasos-komga-shared-vol
+      envFrom:
+        - configMapRef:
+            name: brigadasos-komga-config
       volumes:
         - name: brigadasos-komga-config-vol
           persistentVolumeClaim:
@@ -77,6 +80,7 @@ spec:
         - name: brigadasos-komga-shared-vol
           persistentVolumeClaim:
             claimName: brigadasos-komga-shared-pv-claim
+
 ---
 apiVersion: v1
 kind: Service

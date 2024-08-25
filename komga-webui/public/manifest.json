@@ -1,18 +1,18 @@
 {
-  "name": "Komga",
-  "short_name": "Komga",
+  "name": "Biblioteca",
+  "short_name": "Biblioteca",
   "start_url": ".",
   "display": "standalone",
   "background_color": "#08397f",
   "theme_color": "black",
-  "description": "Free and open source comics/mangas media server",
+  "description": "",
   "icons": [{
     "src": "favicon-32x32.png",
     "sizes": "32x32",
     "type": "image/png"
   }, {
-    "src": "mstile-144x144.png",
-    "sizes": "144x144",
+    "src": "mstile-150x150.png",
+    "sizes": "150x150",
     "type": "image/png"
   }, {
     "src": "apple-touch-icon.png",
