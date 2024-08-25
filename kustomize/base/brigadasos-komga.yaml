@@ -1,34 +1,34 @@
-# apiVersion: v1
-# kind: PersistentVolume
-# metadata:
-#   name: brigadasos-komga-shared-pv
-#   labels:
-#     type: local
-#     app: brigadasos-komga
-# spec:
-#   storageClassName: manual
-#   capacity:
-#     storage: 100Gi
-#   accessModes:
-#     - ReadWriteMany
-#   hostPath:
-#     path: "/mnt/brigadasos-shared"
-# ---
-# apiVersion: v1
-# kind: PersistentVolumeClaim
-# metadata:
-#   name: brigadasos-komga-shared-pv-claim
-#   labels:
-#     app: brigadasos-komga
-# spec:
-#   storageClassName: manual
-#   accessModes:
-#     - ReadWriteMany
-#   resources:
-#     requests:
-#       storage: 100Gi
-# ---
-apiVersion: v1
+apiVersion: apps/v1
+kind: PersistentVolume
+metadata:
+  name: brigadasos-komga-shared-pv
+  labels:
+    type: local
+    app: brigadasos-komga
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  hostPath:
+    path: "/mnt/brigadasos-shared"
+---
+apiVersion: apps/v1
+kind: PersistentVolumeClaim
+metadata:
+  name: brigadasos-komga-shared-pv-claim
+  labels:
+    app: brigadasos-komga
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 100Gi
+---
+apiVersion: apps/v1
 kind: PersistentVolumeClaim
 metadata:
   name: brigadasos-komga-config-pv-claim
@@ -65,18 +65,18 @@ spec:
           name: brigadasos-komga
           ports:
             - containerPort: 25600
-        volumeMount:
-        - mountPath: /config
-          name: brigadasos-komga-config-vol
-        # - mountPath: /shared
-        #   name: brigadasos-komga-shared-vol
+          volumeMount:
+          - mountPath: /config
+            name: brigadasos-komga-config-vol
+          - mountPath: /shared
+            name: brigadasos-komga-shared-vol
       volumes:
         - name: brigadasos-komga-config-vol
           persistentVolumeClaim:
             claimName: brigadasos-komga-config-pv-claim
-        # - name: brigadasos-komga-shared-vol
-        #   persistentVolumeClaim:
-        #     claimName: brigadasos-komga-shared-pv-claim
+        - name: brigadasos-komga-shared-vol
+          persistentVolumeClaim:
+            claimName: brigadasos-komga-shared-pv-claim
 ---
 apiVersion: v1
 kind: Service
